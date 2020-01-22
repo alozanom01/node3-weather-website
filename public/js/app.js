@@ -14,7 +14,8 @@ const messageTwo = document.querySelector('#message-2');
 weatherForm.addEventListener('submit', (e) => {
     e.preventDefault();
     const location = search.value;
-    fetch('http://localhost:3000/weather?address=' + location).then((response) => {
+    //Este fetch está ajustado para que en lugar de acceder a localhost (hardcoded), pueda acceder a una ruta disponible en Heroku, usando la barra '/' para designar la raíz del directorio se sirva desde donde se sirva
+    fetch('/weather?address=' + location).then((response) => {
         response.json().then((data) => {
             if (data.error) {
                 messageOne.textContent = data.error;

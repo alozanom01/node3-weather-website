@@ -7,6 +7,10 @@ const forecast = require('./utils/forecast');
 //Path el path definitivo una vez se han unido los argumentos que se le pasan
 // console.log(path.join(__dirname, '../public/'));
 const app = express();
+
+//Esta línea permite el acceso a una "variable de entorno". En este caso, habilitará que pueda inicializarse con puertos específicos para, por ejemplo, lanzar la app a través de Heroku. En concreto, aquí 'port' se inicializa con la primera opción si existe, y, si no, con 3000 para lanzarse desde el puerto 3000.
+const port = process.env.PORT || 3000;
+
 const publicDirectoryPath = path.join(__dirname, '../public');
 const partialsPath = path.join(__dirname, '../templates/partials');
 
@@ -111,4 +115,10 @@ app.get('*', (req, res) => {
     })
 })
 
-app.listen(3000);
+//Línea para lanzar el servidor a través de un puerto en local. La dejamos al final porque en la parte superior de este documento
+app.listen(port, () =>
+{
+    console.log('Server is up on port ' + port);
+});
+
+
